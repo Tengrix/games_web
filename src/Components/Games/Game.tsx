@@ -1,12 +1,26 @@
 import React from 'react';
-import {gameType} from "../../types/types";
-interface GameType{
-    game:gameType
+import {gameType} from '../../types/types';
+import s from './GameStyle.module.css'
+
+interface GameType {
+    game: gameType
 }
-const Game = ({game}:GameType) => {
+
+const Game = ({game}: GameType) => {
     return (
-        <div>
-            {game.name}
+        <div className={s.game}>
+            <div className={s.gameCard}>
+                <img className={s.gameImg} src={game.background_image} alt="pic"/>
+                <div>
+                    {game.name}
+                </div>
+                <div>
+                    {game.rating}
+                </div>
+                <div>
+                    {game.rating_top}
+                </div>
+            </div>
         </div>
     );
 };

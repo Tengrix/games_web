@@ -5,7 +5,7 @@ import AppRouter from "./Components/AppRouter";
 
 function App() {
     return (
-        <div>
+        <div className={'App'}>
             <Navbar/>
             <AppRouter/>
         </div>

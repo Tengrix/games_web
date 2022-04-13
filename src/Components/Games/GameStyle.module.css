@@ -1,0 +1,10 @@
+
+.gameCard{
+
+}
+.gameImg{
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    width: 100%;
+    height: 250px;
+}

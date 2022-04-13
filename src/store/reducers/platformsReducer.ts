@@ -3,6 +3,7 @@ import {InferActionsType} from "./index";
 import {ThunkDispatch} from "redux-thunk";
 import {createDeflateRaw} from "zlib";
 import {getAllPlatforms} from "../../api/api";
+import {appReducerActions} from './appReducer';
 
 const platformsInitialState:PlatformTypes = {
     count:null,
@@ -30,8 +31,10 @@ export const platformsReducerActions = {
 
 export const fetchPlatforms = () => async (dispatch:ThunkDispatch<any, any, any>)=>{
     try {
+        appReducerActions.setIsLoading(true)
         const data = await getAllPlatforms()
         dispatch(platformsReducerActions.setGamesPlatforms(data.data))
+        appReducerActions.setIsLoading(false)
     }catch (e) {
         
     }

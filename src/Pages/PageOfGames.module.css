@@ -1,0 +1,53 @@
+.gamesPageBlock {
+    display: flex;
+}
+.filterBlock{
+    display: flex;
+    margin: 8px 0;
+    justify-content: space-between;
+}
+.searchBlock {
+    width: 75%;
+    padding: 10px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: white;
+    color: #000;
+}
+
+::placeholder {
+    color: rgba(0, 0, 0, 0.44);
+}
+
+.selectBlock {
+    border-radius: 5px;
+    background-color: white;
+    width: 25%;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    display: block;
+    padding: 12px 55px 15px 15px;
+    font-size: 14px;
+    color: #714BB9;
+}
+
+.searchBlock:after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    line-height: 38px;
+    content: '\2228';
+    text-align: center;
+    color: #714BB9;
+    font-size: 24px;
+    border-left: 1px solid #3C1C78;
+    z-index: -1;
+}

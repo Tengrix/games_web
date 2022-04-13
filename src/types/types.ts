@@ -112,3 +112,4 @@ export interface mainType {
     games:gamesReducerType
     filteredGames:gameType[]
 }
+export type SortingType = 'released'|'-released'|'rating'|'-rating'

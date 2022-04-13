@@ -3,12 +3,14 @@ import {gamesReducer} from "./gamesReudcer";
 import {paginationReducer} from "./paginationReducer";
 import {filterReducer} from "./filterReducer";
 import {PlatformsReducer} from "./platformsReducer";
+import {appReducer} from './appReducer';
 
 export const rootReducers = combineReducers({
     games:gamesReducer,
     pagination:paginationReducer,
     filter:filterReducer,
-    platforms:PlatformsReducer
+    platforms:PlatformsReducer,
+    app:appReducer
 })
 export type AppRootReducerType = ReturnType<typeof rootReducers>
 type PropertiesTypes<T> = T extends {[key:string]: infer U} ? U : never

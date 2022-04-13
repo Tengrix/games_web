@@ -1,6 +1,5 @@
-import {mainType} from '../types/types';
-import {gamesApp, gamesReducer} from '../store/reducers/gamesReudcer';
-const {sum} = require('./../App')
+import {mainType} from '../../types/types';
+import {gamesApp, gamesReducer} from '../../store/reducers/gamesReudcer';
 const initialState: mainType = {
     games: {
         'count': null,

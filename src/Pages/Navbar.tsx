@@ -7,9 +7,6 @@ const Navbar = () => {
             <Link to={'/games'}>
                 Games
             </Link>
-            <Link to={'/platforms'}>
-                Platforms
-            </Link>
         </div>
     );
 };
