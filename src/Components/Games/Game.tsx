@@ -8,17 +8,13 @@ interface GameType {
 
 const Game = ({game}: GameType) => {
     return (
-        <div className={s.game}>
+        <div data-testid={'data_testId'} className={s.game}>
             <div className={s.gameCard}>
                 <img className={s.gameImg} src={game.background_image} alt="pic"/>
+            </div>
+            <div className={s.gameInfo}>
                 <div>
                     {game.name}
-                </div>
-                <div>
-                    {game.rating}
-                </div>
-                <div>
-                    {game.rating_top}
                 </div>
             </div>
         </div>

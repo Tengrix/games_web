@@ -1,7 +1,7 @@
 .mainBlock{
     text-align: left;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 10px;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 2em;
+    grid-gap: 1em;
 }

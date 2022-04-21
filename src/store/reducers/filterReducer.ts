@@ -1,37 +1,26 @@
-import {InferActionsType} from './index';
 import {SortingType} from '../../types/types';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-interface filterReducerType{
-    searchingTitle:string;
-    sort:SortingType
+interface filterReducerType {
+    searchingTitle: string;
+    sort: SortingType
 }
-const filterInitialState:filterReducerType = {
-    searchingTitle:'',
-    sort:'-rating'
-}
-export const filterReducer = (state=filterInitialState, action:filterReducerActionsType) => {
-    switch (action.type) {
-        case "SET_TITLE":
-            return {...state, searchingTitle: action.title}
-        case 'SET_SORTED_GAMES':
-            return {...state, sort:action.sort}
-        default:
-            return state
-    }
-}
-type filterReducerActionsType = InferActionsType<typeof filterReducerActions>
-export const filterReducerActions = {
-    setSearchingTitle:(title:string)=>{
-        return{
-            type:'SET_TITLE',
-            title
-        } as const
-    },
-    setSortedGames: (sort:SortingType)=>{
-        return{
-            type:'SET_SORTED_GAMES',
-            sort
-        } as const
-    }
 
+const filterInitialState: filterReducerType = {
+    searchingTitle: '',
+    sort: '-rating'
 }
+export const filterSlice = createSlice({
+    name: 'filter',
+    initialState: filterInitialState,
+    reducers: {
+        setSearchingTitle: (state, action: PayloadAction<{ title: string }>) => {
+            state.searchingTitle = action.payload.title
+        },
+        setSortedGames: (state, action: PayloadAction<{ value: SortingType }>) => {
+            state.sort = action.payload.value
+        }
+    }
+})
+export const {setSearchingTitle, setSortedGames} = filterSlice.actions
+export const filterReducer = filterSlice.reducer

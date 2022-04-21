@@ -6,15 +6,15 @@ import {Link} from 'react-router-dom';
 
 const Platforms = () => {
     const dispatch = useDispatch()
-    const {results} = UseTypedSelector(state => state.platforms)
+    const {platforms} = UseTypedSelector(state => state.platforms)
     const {isLoading, error} = UseTypedSelector(state => state.app)
     useEffect(() => {
         dispatch(fetchPlatforms())
     }, [])
     return (
         <div>
-            {isLoading ? <h1>LOADING</h1> :
-                results.map(el =>
+            {isLoading ? <h1 data-testid={'platformLoading_testId'}>LOADING...</h1> :
+                platforms.results.length && platforms.results.map(el =>
                     <div key={el.id}>
                         <Link to={`/games/${el.id}`}>
                             {el.name}

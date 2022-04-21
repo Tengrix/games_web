@@ -1,5 +1,5 @@
-import {mainType} from '../../types/types';
-import {gamesApp, gamesReducer} from '../../store/reducers/gamesReudcer';
+import {gameType, mainType} from '../../types/types';
+import {gamesReducer, setGames} from '../../store/reducers/gamesReudcer';
 const initialState: mainType = {
     games: {
         'count': null,
@@ -20,10 +20,12 @@ const initialState: mainType = {
             'stores'
         ],
     },
-    filteredGames: []
+    filteredGames: [],
+    searchedGames:[],
+    singleGame:{} as gameType
 }
 
-test('', () => {
+test('set games', () => {
     const state = {
             "count": 714191,
             "next": "https://api.rawg.io/api/games?key=34f4bc399f394d87a8595769b1ef97ee&page=2",
@@ -43,6 +45,6 @@ test('', () => {
                 "stores"
             ]
     }
-    let newState = gamesReducer(initialState, gamesApp.setGames(state))
+    let newState = gamesReducer(initialState, setGames({data: state}))
     expect(newState.games.count).toBeGreaterThanOrEqual(714191)
 })

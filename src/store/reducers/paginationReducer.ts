@@ -1,35 +1,24 @@
-import {InferActionsType} from "./index";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 type paginationInitialStateType = {
-    currentPage:number;
-    pageSize:number;
+    currentPage: number;
+    pageSize: number;
 }
-const initialState:paginationInitialStateType = {
-    currentPage:1,
-    pageSize:20
+const initialState: paginationInitialStateType = {
+    currentPage: 1,
+    pageSize: 20
 }
-export const paginationReducer = (state=initialState,action:ActionTypes) => {
-    switch(action.type){
-        case "SET_PAGE":
-            return {...state, currentPage:action.page}
-        case "SET_PAGE_SIZE":
-            return {...state, pageSize:action.pageSize}
-        default:
-            return state
+export const paginationSlice = createSlice({
+    name: 'pagination',
+    initialState: initialState,
+    reducers: {
+        setCurrentPage: (state, action: PayloadAction<{ page: number }>) => {
+            state.currentPage = action.payload.page
+        },
+        setPageSize: (state, action: PayloadAction<{ value: number }>) => {
+            state.pageSize = action.payload.value
+        }
     }
-}
-type ActionTypes = InferActionsType<typeof paginationActions>
-export const paginationActions = {
-    setCurrentPage:(page:number)=>{
-        return{
-            type:'SET_PAGE',
-            page
-        } as const
-    },
-    setPageSize:(pageSize:number)=>{
-        return{
-            type:'SET_PAGE_SIZE',
-            pageSize
-        } as const
-    }
-}
+})
+export const {setPageSize, setCurrentPage} = paginationSlice.actions
+export const paginationReducer = paginationSlice.reducer

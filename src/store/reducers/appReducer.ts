@@ -1,27 +1,22 @@
-import {InferActionsType} from './index';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-interface appInitialStateType{
-    isLoading:boolean;
-    error:string;
+interface appInitialStateType {
+    isLoading: boolean;
+    error: string;
 }
-const appInitialState:appInitialStateType = {
-    isLoading:false,
-    error:''
+
+const appInitialState: appInitialStateType = {
+    isLoading: false,
+    error: ''
 }
-export const appReducer = (state=appInitialState, action:appReducerActionsType) =>{
-    switch (action.type) {
-        case 'IS_LOADING':
-            return {...state, isLoading:action.value}
-        default:
-            return state
+export const appSlice = createSlice({
+    name: 'app',
+    initialState: appInitialState,
+    reducers: {
+        setIsLoading: (state, action: PayloadAction<{ value: boolean }>) => {
+            state.isLoading = action.payload.value
+        }
     }
-}
-type appReducerActionsType = InferActionsType<typeof appReducerActions>
-export const appReducerActions = {
-    setIsLoading:(value:boolean)=>{
-        return{
-            type:'IS_LOADING',
-            value
-        } as const
-    }
-}
+})
+export const {setIsLoading} = appSlice.actions
+export const appReducer = appSlice.reducer

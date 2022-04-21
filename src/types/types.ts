@@ -109,7 +109,9 @@ export interface gamesReducerType {
 
 }
 export interface mainType {
-    games:gamesReducerType
-    filteredGames:gameType[]
+    games:gamesReducerType;
+    filteredGames:gameType[];
+    searchedGames:gameType[];
+    singleGame:gameType;
 }
 export type SortingType = 'released'|'-released'|'rating'|'-rating'

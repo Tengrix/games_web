@@ -1,41 +1,37 @@
-import {PlatformTypes} from "../../types/platfomsType/platformTypes";
-import {InferActionsType} from "./index";
-import {ThunkDispatch} from "redux-thunk";
-import {createDeflateRaw} from "zlib";
-import {getAllPlatforms} from "../../api/api";
-import {appReducerActions} from './appReducer';
+import {PlatformFetchingTypes, PlatformTypes} from '../../types/platfomsType/platformTypes';
+import {ThunkDispatch} from 'redux-thunk';
+import {getAllPlatforms} from '../../api/api';
+import {setIsLoading} from './appReducer';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-const platformsInitialState:PlatformTypes = {
-    count:null,
-    next:null,
-    previous:null,
-    results: []
-}
-export const PlatformsReducer = (state=platformsInitialState,action:PlatformsReducerActionType) => {
-    switch (action.type) {
-        case "SET_PLATFORMS":
-            return action.platforms
-        default:
-            return state
+const platformsInitialState: PlatformTypes = {
+    platforms: {
+        count: null,
+        next: null,
+        previous: null,
+        results: []
     }
 }
-type PlatformsReducerActionType = InferActionsType<typeof platformsReducerActions>
-export const platformsReducerActions = {
-    setGamesPlatforms:(platforms:PlatformTypes)=>{
-        return{
-            type:'SET_PLATFORMS',
-            platforms
-        } as const
+export const platformSlice = createSlice({
+    name: 'platform',
+    initialState: platformsInitialState,
+    reducers: {
+        setGamesPlatforms: (state, action: PayloadAction<{ data: PlatformFetchingTypes }>) => {
+            state.platforms = action.payload.data
+        }
     }
-}
+})
+export const {setGamesPlatforms} = platformSlice.actions
+export const platformReducer = platformSlice.reducer
 
-export const fetchPlatforms = () => async (dispatch:ThunkDispatch<any, any, any>)=>{
+export const fetchPlatforms = () => async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
-        appReducerActions.setIsLoading(true)
+        dispatch(setIsLoading({value: true}))
         const data = await getAllPlatforms()
-        dispatch(platformsReducerActions.setGamesPlatforms(data.data))
-        appReducerActions.setIsLoading(false)
-    }catch (e) {
-        
+        dispatch(setGamesPlatforms({data: data.data}))
+        dispatch(setIsLoading({value: false}))
+        console.log(data.data)
+    } catch (e) {
+
     }
 }
