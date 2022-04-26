@@ -7,7 +7,6 @@ import Game from './Games/Game';
 import SingleGame from './Games/SingleGame';
 
 const AppRouter = () => {
-
     return (
         <Switch>
             <Route exact path={'/platforms'}>

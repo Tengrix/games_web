@@ -114,4 +114,11 @@ export interface mainType {
     searchedGames:gameType[];
     singleGame:gameType;
 }
+export interface IfetchingParamsType{
+    page_size: number;
+    page: number;
+    title: string;
+    ordering: SortingType;
+}
+
 export type SortingType = 'released'|'-released'|'rating'|'-rating'

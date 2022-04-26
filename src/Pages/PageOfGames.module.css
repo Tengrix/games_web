@@ -16,6 +16,9 @@
     border: 1px solid yellow;
     width: 50%;
 }
+.autoCompleteBlock ul{
+    list-style-type: none;
+}
 .autoCompleteBlock ul li{
     color: black;
 }
