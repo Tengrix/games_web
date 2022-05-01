@@ -6,7 +6,7 @@ interface filterReducerType {
     sort: SortingType
 }
 
-const filterInitialState: filterReducerType = {
+export const filterInitialState: filterReducerType = {
     searchingTitle: '',
     sort: '-rating'
 }

@@ -24,7 +24,6 @@ const FilterComponent = () => {
         }
     },[])
     const {data: games} = useGetAllGamesQuery(params)
-    console.log(params.title)
     return (
         <div className={s.filterBlock}>
             <input

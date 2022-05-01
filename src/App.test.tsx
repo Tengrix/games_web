@@ -4,10 +4,8 @@ import App from './App';
 import {Provider} from 'react-redux';
 import {store} from './store';
 import {BrowserRouter as Router} from 'react-router-dom';
-import PageOfGames from './Pages/PageOfGames';
-import Platforms from './Pages/Platforms';
 
-describe('renders all pages',()=>{
+describe('renders all pages', () => {
     test('renders learn react link', () => {
         render(
             <Provider store={store}>
@@ -15,28 +13,10 @@ describe('renders all pages',()=>{
                     <App/>
                 </Router>
             </Provider>
-        );
+        )
         const linkElement = screen.getByText('Games');
+        const linkElement2 = screen.getByText('Platforms')
         expect(linkElement).toBeInTheDocument();
+        expect(linkElement2).toBeVisible()
     });
-    test('renders games page', ()=>{
-        render( <Provider store={store}>
-                <Router>
-                    <PageOfGames/>
-                </Router>
-            </Provider>
-        );
-        const linkElement = screen.getByTestId('data_testId')
-        expect(linkElement).toBeInTheDocument()
-    })
-    test('renders platform page', ()=>{
-        render(<Provider store={store}>
-            <Router>
-                <Platforms/>
-            </Router>
-        </Provider>)
-        const linkElement = screen.getByTestId('platformLoading_testId')
-        expect(linkElement).toBeVisible()
-    })
 })
-

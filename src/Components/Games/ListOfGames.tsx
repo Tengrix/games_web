@@ -8,7 +8,7 @@ interface GamesType {
 const ListOfGames = ({games}:GamesType) => {
     return (
         <div className={s.mainBlock}>
-            {games.map(el=>
+            {games && games.map(el=>
                 <Game
                     game={el}
                     key={el.id}
