@@ -1,31 +1,42 @@
 .gamesPageBlock {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: flex-end;
 }
 
-.filterBlock{
+.paginationBlock {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 40px;
+}
+
+.filterBlock {
     display: flex;
     margin: 8px 0;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
-.autoCompleteBlock{
+
+.autoCompleteBlock {
     position: absolute;
-    top: 73px;
-    background-color: white;
-    border: 1px solid yellow;
+    top: 82px;
+    background-color: #f8edbf;
+    border-radius: 5px;
+    border: 1px solid black;
     width: 50%;
 }
-.autoCompleteBlock ul{
+
+.autoCompleteBlock ul {
     list-style-type: none;
 }
-.autoCompleteBlock ul li{
+
+.autoCompleteBlock ul li {
     color: black;
 }
+
 .searchBlock {
     position: relative;
     display: inline-block;
-    width: 75%;
+    width: 70%;
     padding: 10px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -40,8 +51,8 @@
 
 .selectBlock {
     border-radius: 5px;
-    background-color: white;
-    width: 25%;
+    background-color: rgba(118, 118, 124, 0.5);
+    width: 19%;
     border: none;
     outline: none;
     -webkit-appearance: none;
@@ -50,8 +61,8 @@
     margin: 0;
     display: block;
     padding: 12px 55px 15px 15px;
-    font-size: 14px;
-    color: #714BB9;
+    font-size: 18px;
+    color: #130a1a;
 }
 
 .searchBlock:after {

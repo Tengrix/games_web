@@ -1,5 +1,6 @@
 .game{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     width: 350px;
 }

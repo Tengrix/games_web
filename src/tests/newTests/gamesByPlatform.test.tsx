@@ -18,6 +18,5 @@ describe('testing page of games by platform', () => {
         )
         expect(screen.getByRole('heading', {name: /loading/i})).toBeVisible()
         await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
-
     })
 })

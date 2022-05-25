@@ -4,7 +4,7 @@ import {useGetAllPlatformsQuery} from '../api/apiRTKQ';
 import s from './Platforms.module.css'
 
 const Platforms = () => {
-    const {data:platforms,isLoading,error} = useGetAllPlatformsQuery('')
+    const {data:platforms,isLoading,error} = useGetAllPlatformsQuery()
     return (
         <div className={s.platformsBlock}>
             {error && 'Please try again...'}

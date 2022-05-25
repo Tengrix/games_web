@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ListOfGames from '../Components/Games/ListOfGames';
 import Pagination from '../Components/Pagination';
 import {setCurrentPage} from '../store/reducers/paginationReducer';
@@ -11,14 +11,15 @@ import {fetchingParams} from '../utils/fetchingParams';
 
 const PageOfGames = () => {
     let params = fetchingParams()
-    const {isLoading, data:games} = useGetAllGamesQuery(params)
     const dispatch = useDispatch()
-    const onPageChangeHandler = (page: number) => {
-        dispatch(setCurrentPage({page}))
-    }
-
+    const {isLoading, data: games} = useGetAllGamesQuery(params)
+    useEffect(() => {
+        return () => {
+            dispatch(setCurrentPage({page: 1}))
+        }
+    }, [])
     return (
-        <div className={s.gamesPageBlock}>
+        <div>
 
             {isLoading ? <h1 data-testid={'data_testId'}>LOADING...</h1> :
                 <div>
@@ -26,13 +27,14 @@ const PageOfGames = () => {
                     <ListOfGames
                         games={games?.results as gameType[]}
                     />
-                    <Pagination
-                        totalCount={games?.count as number}
-                        currentPage={params.page}
-                        pageSize={params.page_size}
-                        onPageChange={onPageChangeHandler}
-                        portionSize={10}
-                    />
+                    <div className={s.paginationBlock}>
+                        <Pagination
+                            totalCount={games?.count as number}
+                            currentPage={params.page}
+                            pageSize={params.page_size}
+                            portionSize={10}
+                        />
+                    </div>
                 </div>
             }
         </div>

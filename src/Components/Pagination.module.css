@@ -1,0 +1,21 @@
+.paginationBtn{
+    border-radius: 20px;
+    height: 40px;
+    width: 40px;
+    background-color: darkgray;
+    color: #714BB9;
+    margin-right: 5px;
+}
+.nextBtn{
+    height: 40px;
+    width: 80px;
+    background-color: darkgray;
+    color: #714BB9;
+}
+.selectedBtn {
+    height: 40px;
+    width: 40px;
+    background-color: rgba(101, 101, 92, 0.03);
+    margin-right: 5px;
+    color: rgb(26, 26, 26);
+}

@@ -1,11 +1,8 @@
-*{
-  font-family: 'Roboto', sans-serif;
-  color: white;
-  margin: 0 auto;
-}
 .App {
+  margin: 0 auto;
   padding: 20px;
-  background-color: #130a1a;
   display: grid;
   grid-template-columns: 1fr 5fr;
+  font-family: 'Roboto', sans-serif;
+  color: #0c3324;
 }
