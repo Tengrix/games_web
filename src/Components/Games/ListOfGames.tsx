@@ -1,19 +1,31 @@
 import React from 'react';
-import {gameType} from "../../types/types";
-import Game from "./Game";
-import s from './ListOfGamesStyle.module.css'
+import {gameType} from '../../types/types';
+import Game from './Game';
+import s from './ListOfGamesStyle.module.scss'
+import LoadingComponent from '../LoadingComponent/LoadingComponent';
+
 interface GamesType {
-    games:gameType[]
+    games: gameType[];
+    isFetching: boolean;
 }
-const ListOfGames = ({games}:GamesType) => {
+
+const ListOfGames = ({games, isFetching}: GamesType) => {
     return (
         <div className={s.mainBlock}>
-            {games && games.map(el=>
-                <Game
-                    game={el}
-                    key={el.id}
-                />
-            )}
+            {isFetching
+                ?
+                <div className={s.loadingBlock}>
+                    <LoadingComponent/>
+                </div>
+                :
+                games.map(el =>
+                    <Game
+                        game={el}
+                        key={el.id}
+                    />
+                )
+
+            }
         </div>
     );
 };

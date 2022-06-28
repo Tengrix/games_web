@@ -6,10 +6,12 @@ import AppRouter from './Components/AppRouter';
 function App() {
     return (
         <div className={'App'}>
-            <span>
+            <div>
                 <Navbar/>
-            </span>
-            <AppRouter/>
+            </div>
+            <div>
+                <AppRouter/>
+            </div>
         </div>
 
     );

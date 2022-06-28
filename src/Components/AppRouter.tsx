@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import Platforms from '../Pages/Platforms';
 import PageOfGames from '../Pages/PageOfGames';
 import GamesByPlatform from '../Pages/GamesByPlatform';
@@ -21,6 +21,7 @@ const AppRouter = () => {
             <Route exact path={'/game/:id'}>
                 <SingleGame/>
             </Route>
+            <Redirect to={'/games'}/>
         </Switch>
     );
 };

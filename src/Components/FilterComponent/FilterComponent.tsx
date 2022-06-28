@@ -6,6 +6,7 @@ import {setSearchingTitle, setSortedGames} from '../../store/reducers/filterRedu
 import {SortingType} from '../../types/types';
 import {useGetAllGamesQuery} from '../../api/apiRTKQ';
 import {fetchingParams} from '../../utils/fetchingParams';
+import {setPageSize} from '../../store/reducers/paginationReducer';
 
 const FilterComponent = () => {
     const dispatch = useDispatch()
@@ -17,6 +18,9 @@ const FilterComponent = () => {
     }
     const onSortHandler = (e: ChangeEvent<HTMLSelectElement>) => {
         dispatch(setSortedGames({value: e.target.value as SortingType}))
+    }
+    const onChangePageSize = (e:ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setPageSize({value:+e.target.value}))
     }
     useEffect(()=>{
         return ()=> {
@@ -35,11 +39,16 @@ const FilterComponent = () => {
                 name={'search'}
                 onChange={onChangeHandler}
             />
-            <select className={s.selectBlock} value={params.ordering} onChange={onSortHandler} name="" id="">
+            <select className={s.selectBlock} value={params.ordering} onChange={onSortHandler} >
                 <option value="-released">New</option>
                 <option value="released">Old</option>
                 <option value="-rating">Top-rating</option>
                 <option value="rating">Low-rating</option>
+            </select>
+            <select value={params.page_size} onChange={onChangePageSize}>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
             </select>
             {params.title !== '' &&
             <div className={params.title? s.autoCompleteBlock:''}>

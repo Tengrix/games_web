@@ -7,26 +7,27 @@ import Pagination from '../Components/Pagination';
 import {UseTypedSelector} from '../hooks/useTypedSelector';
 import {setCurrentPage} from '../store/reducers/paginationReducer';
 import {useDispatch} from 'react-redux';
+import LoadingComponent from '../Components/LoadingComponent/LoadingComponent';
 
 const GamesByPlatform = () => {
     const dispatch = useDispatch()
-    const {currentPage,pageSize} = UseTypedSelector(state => state.pagination)
+    const {currentPage, pageSize} = UseTypedSelector(state => state.pagination)
     const {id} = useParams<{ id: string }>()
-    let params:fetchingParamsType = {
-        page:currentPage,
-        platformId:+id
+    let params: fetchingParamsType = {
+        page: currentPage,
+        platformId: +id
     }
-    const {isLoading, data:filteredGames,isError} = useGetGamesByPlatformQuery(params)
-    useEffect(()=>{
-        return()=>{
-            dispatch(setCurrentPage({page:1}))
+    const {isLoading, data: filteredGames, isError} = useGetGamesByPlatformQuery(params)
+    useEffect(() => {
+        return () => {
+            dispatch(setCurrentPage({page: 1}))
         }
-    },[])
+    }, [])
     return (
-        <div >
+        <div>
             <div className={s.mainBlock}>
                 {isError && 'Не найдена страница...'}
-                {isLoading ? <h1>LOADING...</h1> :
+                {isLoading ? <LoadingComponent/> :
                     filteredGames?.results.map(el =>
                         <Game
                             key={el.id}
@@ -39,6 +40,7 @@ const GamesByPlatform = () => {
                 currentPage={params.page}
                 pageSize={pageSize}
                 portionSize={10}
+                siblingCount={1}
             />
 
         </div>

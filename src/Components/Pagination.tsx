@@ -1,54 +1,104 @@
-import React, {useState} from 'react';
-import {usePagination} from '../hooks/usePagination';
-import {portionCount} from '../utils/pages';
+import React from 'react';
+import s from './Pagination.module.scss'
+import {DOTS, usePagination} from '../hooks/usePagination';
 import {setCurrentPage} from '../store/reducers/paginationReducer';
 import {useDispatch} from 'react-redux';
-import s from './Pagination.module.css'
+import arrowLeft from '../assets/icons8-arrow-pointing-left.gif'
+import arrowRight from '../assets/icons8-arrow.gif'
 
 interface PaginationType {
-    totalCount: number | null;
+    totalCount: number
     currentPage: number;
     pageSize: number;
     portionSize: number;
+    siblingCount: number;
 }
 
-const Pagination = ({pageSize, totalCount, portionSize,currentPage}: PaginationType) => {
+const Pagination = ({pageSize, totalCount, siblingCount, currentPage}: PaginationType) => {
     const dispatch = useDispatch()
-    const newStyle = (page:number) => {
-        return page ? s.selectedBtn : s.paginationBtn
+    const paginationRange = usePagination({
+        currentPage,
+        totalCount,
+        siblingCount,
+        pageSize,
+    });
+    if (currentPage === 0 || (paginationRange?.length as number) < 2) {
+        return null;
     }
-    let portionAmount = portionCount(totalCount as number, pageSize, portionSize)
-    let pages = usePagination(totalCount as number, pageSize)
-    let [portionNumber, setPortionNumber] = useState(1)
-    let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
-    let rightPortionPageNumber = portionNumber * portionSize
+    const lastEl = paginationRange && paginationRange[paginationRange.length - 1]
+    const onNext = () => {
+        dispatch(setCurrentPage({page: currentPage + 1}))
+    };
+
+    const onPrevious = () => {
+        dispatch(setCurrentPage({page: currentPage - 1}))
+    };
     const onPageChangeHandler = (page: number) => {
         dispatch(setCurrentPage({page}))
     }
     return (
-        <div>
-            {portionNumber > 1 &&
-            <button onClick={() => setPortionNumber(portionNumber - 1)}> PREV</button>}
-            {pages.filter(el => el >= leftPortionPageNumber && el <= rightPortionPageNumber)
-                .map((el, i) => {
-                    return <span key={i}>
+        <ul
+            className={s.wrapper}>
+            <li className={s.paginationItem}>
+                <button
+                    type="button"
+                    className={s.arrowButton}
+                    onClick={onPrevious}
+                    disabled={currentPage === 1}
+                >
+                    <img src={arrowLeft} style={{width: 'inherit', height: 'inherit'}} alt=""/>
+                </button>
+            </li>
+            {paginationRange && paginationRange.map((pageNumber, idx) => {
+                if (pageNumber === DOTS) {
+                    return (
+                        <li key={idx} className={s.dots}>
+                            &#8230;
+                        </li>
+                    );
+                }
+
+                return (
+                    <li
+                        key={idx}
+                        className={s.paginationItem}
+                        aria-current={currentPage === pageNumber ? 'page' : 'false'} // change this line to highlight a current page.
+                    >
                         <button
-                            className={currentPage===el?s.selectedBtn : s.paginationBtn}
-                            onClick={() => onPageChangeHandler(el)}>
-                           <b>{el}</b>
+                            type="button"
+                            onClick={() => onPageChangeHandler(pageNumber as number)}
+                        >
+                            {pageNumber}
                         </button>
-                    </span>
-
-                })}
-
-            {portionAmount > portionNumber &&
-            <button
-                className={s.nextBtn}
-                onClick={() => setPortionNumber(portionNumber + 1)}>
-                NEXT
-            </button>
-            }
-        </div>
+                    </li>
+                );
+            })}
+            <li className={s.paginationItem}>
+                <button
+                    type="button"
+                    className={s.arrowButton}
+                    onClick={onNext}
+                    disabled={currentPage === lastEl} // change this line to disable a button.
+                >
+                    <img src={arrowRight} style={{width: 'inherit', height: 'inherit'}} alt=""/>
+                </button>
+            </li>
+            {/*<select*/}
+            {/*    className="paginationSelector"*/}
+            {/*    // Do not remove the aria-label below, it is used for Hatchways automation.*/}
+            {/*    aria-label="Select page size"*/}
+            {/*    value={pageSize}*/}
+            {/*    onChange={(e) => {*/}
+            {/*        onPageSizeOptionChange(e.target.value);*/}
+            {/*    }}*/}
+            {/*>*/}
+            {/*    {pageSizeOptions.map((size) => (*/}
+            {/*        <option key={size} defaultValue={pageSize === size} value={size}>*/}
+            {/*            {size} per page*/}
+            {/*        </option>*/}
+            {/*    ))}*/}
+            {/*</select>*/}
+        </ul>
     );
 };
 
