@@ -37,8 +37,7 @@ const Pagination = ({pageSize, totalCount, siblingCount, currentPage}: Paginatio
         dispatch(setCurrentPage({page}))
     }
     return (
-        <ul
-            className={s.wrapper}>
+        <ul className={s.wrapper}>
             <li className={s.paginationItem}>
                 <button
                     type="button"

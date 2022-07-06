@@ -1,20 +1,21 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import s from '../../Pages/PageOfGames.module.css';
 import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {setSearchingTitle, setSortedGames} from '../../store/reducers/filterReducer';
 import {SortingType} from '../../types/types';
 import {useGetAllGamesQuery} from '../../api/apiRTKQ';
-import {fetchingParams} from '../../utils/fetchingParams';
+import {useFetchingParams} from '../../hooks/useFetchingParams';
 import {setPageSize} from '../../store/reducers/paginationReducer';
+import s from './Filter.module.scss'
+import {useDebounce} from '../../hooks/useDebounce';
+import {UseTypedSelector} from '../../hooks/useTypedSelector';
 
 const FilterComponent = () => {
+
     const dispatch = useDispatch()
-    const [isLoading, setIsLoading] = useState(false)
-    let params = fetchingParams()
+    let params = useFetchingParams()
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(setSearchingTitle({title: e.target.value}))
-        setIsLoading(!isLoading)
+        dispatch(setSearchingTitle({title: e.currentTarget.value}))
     }
     const onSortHandler = (e: ChangeEvent<HTMLSelectElement>) => {
         dispatch(setSortedGames({value: e.target.value as SortingType}))
@@ -40,12 +41,14 @@ const FilterComponent = () => {
                 onChange={onChangeHandler}
             />
             <select className={s.selectBlock} value={params.ordering} onChange={onSortHandler} >
+                <option value="-rating">Ordered by: Top-rating </option>
                 <option value="-released">New</option>
                 <option value="released">Old</option>
                 <option value="-rating">Top-rating</option>
                 <option value="rating">Low-rating</option>
             </select>
-            <select value={params.page_size} onChange={onChangePageSize}>
+            <select value={params.page_size} className={s.pageSizeSelect} onChange={onChangePageSize}>
+                <option value="20">Games in a page: 20</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="30">30</option>

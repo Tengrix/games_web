@@ -1,0 +1,71 @@
+.filterBlock {
+  display: grid;
+  margin: 8px 0;
+  grid-template-columns: 3fr 1fr 0.5fr;
+
+  .searchBlock {
+    position: relative;
+    display: inline-block;
+    padding: 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 35px;
+    box-sizing: border-box;
+    background-color: white;
+    color: #000;
+  }
+
+  .searchBlock:after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    line-height: 38px;
+    content: '\2228';
+    text-align: center;
+    color: #714BB9;
+    font-size: 24px;
+    border-left: 1px solid #3C1C78;
+    z-index: -1;
+  }
+
+  .selectBlock {
+    border-radius: 5px;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    display: block;
+    padding: 12px 55px 15px 15px;
+    font-size: 15px;
+    color: #130a1a;
+  }
+  .pageSizeSelect{
+    border-radius: 5px;
+    display: block;
+    padding: 12px 55px 15px 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  .autoCompleteBlock {
+    position: absolute;
+    top: 82px;
+    background-color: #f8edbf;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 50%;
+  }
+
+  .autoCompleteBlock ul {
+    list-style-type: none;
+  }
+
+  .autoCompleteBlock ul li {
+    color: black;
+  }
+
+  ::placeholder {
+    color: rgba(0, 0, 0, 0.44);
+  }
+}

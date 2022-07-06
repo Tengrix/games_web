@@ -2,14 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
     margin-top: 20px;
-    grid-gap: 1em;
-
-    .loadingBlock{
-        justify-content: center;
-        align-items: center;
-        width: 300px;
-        height: 300px;
-    }
+    grid-gap: 1.4em;
 }

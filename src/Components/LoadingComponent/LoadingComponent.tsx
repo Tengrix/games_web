@@ -1,13 +1,19 @@
 import React from 'react';
 import {ClockLoader} from 'react-spinners'
+import s from './LoadingComponent.module.scss'
 
 const LoadingComponent = () => {
     return (
-        <ClockLoader
-            size={200}
-            color="rgba(71, 5, 255, 1)"
-            speedMultiplier={3}
-        />
+        <div className={s.loadingBlock}>
+            <ClockLoader
+                size={200}
+                cssOverride={{
+                    backgroundColor: 'black'
+                }}
+                color="red"
+                speedMultiplier={3}
+            />
+        </div>
     );
 };
 

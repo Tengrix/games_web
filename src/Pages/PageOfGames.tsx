@@ -1,16 +1,17 @@
 import React from 'react';
 import ListOfGames from '../Components/Games/ListOfGames';
 import Pagination from '../Components/Pagination';
-import s from './PageOfGames.module.css';
 import FilterComponent from '../Components/FilterComponent/FilterComponent';
 import {useGetAllGamesQuery} from '../api/apiRTKQ';
 import {gameType} from '../types/types';
-import {fetchingParams} from '../utils/fetchingParams';
+import {useFetchingParams} from '../hooks/useFetchingParams';
 import LoadingComponent from '../Components/LoadingComponent/LoadingComponent';
 
 const PageOfGames = () => {
-    let params = fetchingParams()
-    const {isLoading, data: games, isSuccess,isFetching} = useGetAllGamesQuery(params)
+    let params = useFetchingParams()
+    const {data: games, isFetching, isLoading} = useGetAllGamesQuery(params,{
+        pollingInterval:30000
+    })
     return (
         <div>
             {isLoading ?
@@ -22,7 +23,8 @@ const PageOfGames = () => {
                         isFetching={isFetching}
                         games={games?.results as gameType[]}
                     />
-                    <div className={s.paginationBlock}>
+                    {isFetching ?
+                        '' :
                         <Pagination
                             siblingCount={1}
                             totalCount={games?.count as number}
@@ -30,7 +32,7 @@ const PageOfGames = () => {
                             pageSize={params.page_size}
                             portionSize={10}
                         />
-                    </div>
+                    }
                 </div>
             }
         </div>
